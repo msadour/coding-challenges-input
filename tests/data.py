@@ -14,4 +14,3 @@ def medium_risk_data():
 @pytest.fixture
 def high_risk_data():
     return "".join(["model.add(Dense(8, activation='relu'))\n" for _ in range(1, 40)])
-

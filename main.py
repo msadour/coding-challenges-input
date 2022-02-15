@@ -3,7 +3,7 @@ import sys
 from utils.displayer import as_command_line, as_file_text, as_html
 from utils.reader import Reader
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     reader = Reader()
     reader.generate_result()
 

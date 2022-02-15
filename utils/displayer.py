@@ -1,9 +1,13 @@
 def as_html(results):
-    with open('results/file.html', 'w') as f:
-        message = """<html>
+    with open("results/file.html", "w") as f:
+        message = (
+            """<html>
         <head></head>
-        <body><p>""" + results + """</p></body>
+        <body><p>"""
+            + results
+            + """</p></body>
         </html>"""
+        )
         f.write(message)
 
 
@@ -12,5 +16,5 @@ def as_command_line(results):
 
 
 def as_file_text(results):
-    with open('results/file.txt', 'w') as f:
+    with open("results/file.txt", "w") as f:
         f.write(results)

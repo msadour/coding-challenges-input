@@ -1,21 +1,27 @@
 from utils import github
-from utils.constants import GITHUB_FILES, GITHUB_USERNAME, GITHUB_REPOSITORY_NAME, GITHUB_FOLDER
+from utils.constants import (
+    GITHUB_FILES,
+    GITHUB_USERNAME,
+    GITHUB_REPOSITORY_NAME,
+    GITHUB_FOLDER,
+)
 
 
 class Reader:
-
     def __init__(self):
         self.results = []
 
     def results_as_string(self, format="text"):
         if format == "text":
-            return '\n\n'.join(self.results)
-        return '<br /><br />'.join(self.results)
+            return "\n\n".join(self.results)
+        return "<br /><br />".join(self.results)
 
     @staticmethod
-    def lines_formatter(file):
-        lines = file.split("\n")
-        lines = [line.replace(" ", "") for line in lines if line != "" or "#" not in line]
+    def lines_formatter(file_content):
+        lines = file_content.split("\n")
+        lines = [
+            line.replace(" ", "") for line in lines if line != "" or "#" not in line
+        ]
         return lines
 
     @staticmethod
@@ -24,14 +30,14 @@ class Reader:
             username=GITHUB_USERNAME,
             repository_name=GITHUB_REPOSITORY_NAME,
             file_path=GITHUB_FOLDER,
-            file_name=file_name
+            file_name=file_name,
         )
 
     def extract_result(self, file_content, file_name):
         total_layer = 0
         total_relu = 0
         total_sigmoid = 0
-        lines = self.lines_formatter(file_content)
+        lines = self.lines_formatter(file_content=file_content)
         for line in lines:
             if "'relu'" in line:
                 total_layer += 1
