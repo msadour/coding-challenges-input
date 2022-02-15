@@ -8,6 +8,16 @@ import requests
 def get_file(
     username: str, repository_name: str, file_path: str, file_name: str
 ) -> str:
+    """
+    Get content file from github file.
+    Args:
+        username:
+        repository_name:
+        file_path:
+        file_name:
+    Returns:
+        Content file from github.
+    """
     headers = {}
 
     url = f"https://api.github.com/repos/{username}/{repository_name}/contents/{file_path}/{file_name}"

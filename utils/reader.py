@@ -18,12 +18,29 @@ class Reader:
         self.results = []
 
     def results_with_format(self, format_returned="text") -> str:
+        """
+        Format result.
+        Args:
+            format_returned: could be html or text
+        Returns:
+            Content file from github.
+        """
         if format_returned == "text":
             return "\n\n".join(self.results)
-        return "<br /><br />".join(self.results)
+        elif format_returned == "html":
+            return "<br /><br />".join(self.results)
+        else:
+            raise Exception("Format value should be html or text")
 
     @staticmethod
     def lines_formatter(file_content: str) -> List:
+        """
+        Remove space in line or ignore line with comments.
+        Args:
+            file_content: could be html or text
+        Returns:
+            Content file from github.
+        """
         lines = file_content.split("\n")
         lines = [
             line.replace(" ", "") for line in lines if line != "" or "#" not in line
@@ -32,6 +49,13 @@ class Reader:
 
     @staticmethod
     def read_file(file_name: str) -> str:
+        """
+        Get content file from github.
+        Args:
+            file_name:
+        Returns:
+            Content file from github.
+        """
         return github.get_file(
             username=GITHUB_USERNAME,
             repository_name=GITHUB_REPOSITORY_NAME,
@@ -40,6 +64,14 @@ class Reader:
         )
 
     def extract_result(self, file_content: str, file_name: str) -> str:
+        """
+        Generate result from file content.
+        Args:
+            file_content:
+            file_name:
+        Returns:
+            Result.
+        """
         total_layer = 0
         total_relu = 0
         total_sigmoid = 0
@@ -64,6 +96,9 @@ class Reader:
         return result
 
     def generate_result(self) -> None:
+        """
+        Extract and put results in the objects.
+        """
         for file_name in GITHUB_FILES:
             file_content = self.read_file(file_name)
             result = self.extract_result(file_content=file_content, file_name=file_name)
