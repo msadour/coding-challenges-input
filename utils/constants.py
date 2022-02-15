@@ -1,3 +1,5 @@
+"""Constants file"""
+
 GITHUB_USERNAME = "Kodex-AI"
 GITHUB_REPOSITORY_NAME = "coding-challenges-input"
 GITHUB_FOLDER = "python-challenge"

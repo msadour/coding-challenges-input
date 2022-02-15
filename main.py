@@ -1,3 +1,5 @@
+"""Main file."""
+
 import sys
 
 from utils.displayer import as_command_line, as_file_text, as_html
@@ -8,8 +10,8 @@ if __name__ == "__main__":
     reader.generate_result()
 
     if sys.argv[1] == "html_file":
-        as_html(reader.results_as_string(format="html"))
+        as_html(reader.results_with_format(format_returned="html"))
     elif sys.argv[1] == "text_file":
-        as_file_text(reader.results_as_string())
+        as_file_text(reader.results_with_format())
     else:
-        as_command_line(reader.results_as_string())
+        as_command_line(reader.results_with_format())

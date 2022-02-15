@@ -1,9 +1,13 @@
+"""github module."""
+
 import base64
 
 import requests
 
 
-def get_file(username, repository_name, file_path, file_name):
+def get_file(
+    username: str, repository_name: str, file_path: str, file_name: str
+) -> str:
     headers = {}
 
     url = f"https://api.github.com/repos/{username}/{repository_name}/contents/{file_path}/{file_name}"

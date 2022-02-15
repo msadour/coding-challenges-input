@@ -1,3 +1,7 @@
+"""Reader file."""
+
+from typing import List
+
 from utils import github
 from utils.constants import (
     GITHUB_FILES,
@@ -8,16 +12,18 @@ from utils.constants import (
 
 
 class Reader:
+    """Class Reader."""
+
     def __init__(self):
         self.results = []
 
-    def results_as_string(self, format="text"):
-        if format == "text":
+    def results_with_format(self, format_returned="text") -> str:
+        if format_returned == "text":
             return "\n\n".join(self.results)
         return "<br /><br />".join(self.results)
 
     @staticmethod
-    def lines_formatter(file_content):
+    def lines_formatter(file_content: str) -> List:
         lines = file_content.split("\n")
         lines = [
             line.replace(" ", "") for line in lines if line != "" or "#" not in line
@@ -25,7 +31,7 @@ class Reader:
         return lines
 
     @staticmethod
-    def read_file(file_name):
+    def read_file(file_name: str) -> str:
         return github.get_file(
             username=GITHUB_USERNAME,
             repository_name=GITHUB_REPOSITORY_NAME,
@@ -33,7 +39,7 @@ class Reader:
             file_name=file_name,
         )
 
-    def extract_result(self, file_content, file_name):
+    def extract_result(self, file_content: str, file_name: str) -> str:
         total_layer = 0
         total_relu = 0
         total_sigmoid = 0
@@ -57,7 +63,7 @@ class Reader:
         result = f"Found deep neural network with {total_layer} hidden layers in {file_name} ({total_sigmoid} sigmoid(s) activation functions, {total_relu} relu(s) activation functions), posing a {risk}."
         return result
 
-    def generate_result(self):
+    def generate_result(self) -> None:
         for file_name in GITHUB_FILES:
             file_content = self.read_file(file_name)
             result = self.extract_result(file_content=file_content, file_name=file_name)
